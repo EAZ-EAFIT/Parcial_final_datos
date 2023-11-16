@@ -1,44 +1,32 @@
 import networkx as nx
 import matplotlib.pyplot as plt
-import numpy as np
 
 def mostrarGrafo(mAdyacencia):
     Grafo = nx.DiGraph()
 
-    # Agregar nodos al grafo
     numNodos = len(mAdyacencia)
     
+    #Agregamos los nodos al grafo
     Grafo.add_nodes_from(range(numNodos))
 
-    #
+    #Agregamos los pesos a las aristas
     for i in range(numNodos):
         for j in range(numNodos):
             peso = mAdyacencia[i][j]
             if peso > 0:
                 Grafo.add_edge(i, j, weight=peso)
 
-    # Obtener posiciones de los nodos para la visualización
+    #Metodo para que la visualización del grafo sea ordenada
     pos = nx.spring_layout(Grafo)
 
-    # Obtener pesos de los bordes
+    #Obtener pesos de las aristas
     pesosAristas = {(i, j): Grafo[i][j]['weight'] for i, j in Grafo.edges()}
 
-    # Dibujar nodos y bordes ponderados
+    #Dibujar el grafo con los nodos y los pesos de las aristas
     nx.draw(Grafo, pos, with_labels=True, font_weight='bold', node_size=700, node_color='skyblue', font_color='black', font_size=8, arrowsize=10)
     nx.draw_networkx_edge_labels(Grafo, pos, edge_labels=pesosAristas)
 
-    # Mostrar el gráfico
+    # Mostrar el grafo
     plt.show()
 
-# Ejemplo de matriz de adyacencia ponderada
-matrizPonderada = [
-    [0, 3, 2, 0, 7],
-    [0, 0, 1, 4, 0],
-    [0, 0, 0, 5, 1],
-    [6, 0, 0, 0, 7]
-]
-
-
-# Dibujar el grafo ponderado
-mostrarGrafo(matrizPonderada)
 
