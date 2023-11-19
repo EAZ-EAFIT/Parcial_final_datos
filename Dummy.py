@@ -1,27 +1,21 @@
-from builtins import print, range
 from faker import Faker
 import random
-
-class Mensaje:
-    def _init_(self, id_persona_origen, id_persona_destino, fecha, contenido):
-        self.id_persona_origen = id_persona_origen
-        self.id_persona_destino = id_persona_destino
-        self.fecha = fecha
-        self.contenido = contenido
-
-    def _str_(self):
-        return f"De: {self.id_persona_origen} | Para: {self.id_persona_destino} | Fecha: {self.fecha} | Contenido: {self.contenido}"
+import Persona
+from Mensaje import Mensaje
 
 class GeneradorMensajes:
-    def _init_(self, num_mensajes):
+    def __init__(self, num_mensajes, num_personas):
         self.num_mensajes = num_mensajes
-        self.fake = Faker()
+        self.num_personas = num_personas
 
     def generar_mensaje(self):
-        id_persona_origen = random.randint(1, 100)
-        id_persona_destino = random.randint(1, 100)
-        fecha = self.fake.date_time_this_decade().strftime("%Y-%m-%d %H:%M:%S")
-        contenido = self.fake.text()
+        # EVITAR MENSAJE A SI MISMO
+        id_persona_origen = random.randint(1, self.num_personas)
+        id_persona_destino = random.randint(1, self.num_personas)
+
+        fecha = Faker().date_time_this_decade().strftime("%Y-%m-%d %H:%M:%S")
+        contenido = Faker().text()
+
         return Mensaje(id_persona_origen, id_persona_destino, fecha, contenido)
 
     def generar_mensajes(self):
@@ -31,12 +25,12 @@ class GeneradorMensajes:
             mensajes.append(mensaje)
         return mensajes
 
-# Crear una instancia del generador de mensajes
-generador = GeneradorMensajes(num_mensajes=5)
+def lista_mensajes(num_mensajes, num_personas):
+    # Crear una instancia del generador de mensajes
+    personas = Persona.generar_personas(num_personas)
+    generador = GeneradorMensajes(num_mensajes, num_personas)
 
-# Generar mensajes ficticios
-mensajes_generados = generador.generar_mensajes()
+    # Generar mensajes ficticios
+    mensajes_generados = generador.generar_mensajes()
 
-# Imprimir los mensajes generados
-for mensaje in mensajes_generados:
-    print(mensaje)
+    return mensajes_generados

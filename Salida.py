@@ -5,7 +5,7 @@ def mostrarGrafo(mAdyacencia):
     Grafo = nx.DiGraph()
 
     numNodos = len(mAdyacencia)
-    
+
     #Agregamos los nodos al grafo
     Grafo.add_nodes_from(range(numNodos))
 
@@ -28,5 +28,3 @@ def mostrarGrafo(mAdyacencia):
 
     # Mostrar el grafo
     plt.show()
-
-
