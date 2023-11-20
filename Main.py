@@ -4,9 +4,11 @@ import Salida
 import Persona
 
 def main():
+    #Definimos el numero de personas y mensajes que vamos a generar
     num_personas = 10
     num_mensajes = 100
 
+    #Generamos los arreglo con las personas correspondientes y los mensajes
     personas = Persona.generar_personas(num_personas)
 
     mensajes = Dummy.generar_mensajes(personas, num_mensajes)

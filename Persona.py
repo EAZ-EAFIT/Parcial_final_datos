@@ -1,10 +1,12 @@
 import random
 
 class Persona:
+    #La clase persona nos sirve para identificar las personas que creamos con nombre y ID
     def __init__(self, id, nombre):
         self.id = id
         self.nombre = nombre
 
+#Función para generar nombres aleatorios
 def nombre_aleatorio():
     lista_nombres = [
         "Juan", "María", "José", "Ana", "Pedro", "Isabel", "Luis", "Laura", "Carlos", "Elena",
@@ -20,6 +22,7 @@ def nombre_aleatorio():
 
     return random.choice(lista_nombres)
 
+#Generamos un numero limitado de objetos de la clase persona  y las guardamos en el arreglo personas[], el cual retornamos
 def generar_personas(num_personas):
     personas = []
     for id in range(num_personas):
