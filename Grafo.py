@@ -56,20 +56,28 @@ class Grafo:
 
         # Si no existe conexión entre emisor y receptor, se aumenta el grado de sus nodos
         if self.matriz_adyacencia[idx_origen][idx_destino] == 0:
-            self.nodos[idx_origen].grado += 1
-            self.nodos[idx_destino].grado += 1
+            grado_origen = nodo_origen.grado + 1
+            grado_destino = nodo_destino.grado + 1
 
             # Se valida si emisor tiene la mayor cantidad de conexiones
-            if len(self.max_nodos) == 0 or self.max_nodos[0].grado == nodo_origen.grado:
+            if len(self.max_nodos) == 0 or self.max_nodos[0].grado == grado_origen:
                 self.max_nodos.append(nodo_origen)
-            elif self.max_nodos[0].grado < nodo_origen.grado:
+                nodo_origen.grado += 1
+            elif self.max_nodos[0].grado < grado_origen:
                 self.max_nodos = [nodo_origen]
+                nodo_origen.grado += 1
+            else:
+                nodo_origen.grado += 1
 
             # Se valida si receptor tiene la mayor cantidad de conexiones
-            if len(self.max_nodos) == 0 or self.max_nodos[0].grado == nodo_destino.grado:
+            if len(self.max_nodos) == 0 or self.max_nodos[0].grado == grado_destino:
                 self.max_nodos.append(nodo_destino)
-            elif self.max_nodos[0].grado < nodo_destino.grado:
+                nodo_destino.grado += 1
+            elif self.max_nodos[0].grado < grado_destino:
                 self.max_nodos = [nodo_destino]
+                nodo_destino.grado += 1
+            else:
+                nodo_destino.grado += 1
 
         """ Identificación de conexión más fuerte """
 
@@ -90,14 +98,30 @@ class Grafo:
             self.añadir_mensaje(mensaje)
 
     # Imprime datos importantes del grado
-    # MEJORAR
     def print_datos(self):
-        print(self.max_aristas)
+        print("--------------------------------")
+        print("Reporte de Datos")
+        print("--------------------------------")
+        print()
+        print("--------------------------------")
+        print("Relación más fuerte")
+        print("Más amigos")
+        print("--------------------------------")
+
         for arista in self.max_aristas:
-            print(f"{arista.peso}  entre {arista.nodo_origen.objeto.nombre} y {arista.nodo_destino.objeto.nombre}")
+            print(f"{arista.nodo_origen.objeto.nombre} y {arista.nodo_destino.objeto.nombre} con {arista.peso} mensajes")
+            print()
+        print("--------------------------------")
+        print("Nodos con más amigos")
+        print("--------------------------------")
+        print()
         for nodo in self.max_nodos:
-            print(f"Maximo nodo: {nodo.objeto.nombre} {nodo.objeto.id} grado: {nodo.grado}")
+            print(f"Maximo nodo: {nodo.objeto.nombre} id: {nodo.objeto.id} grado: {nodo.grado}")
 
     # Imprime el grafo como lista de adyacencia
     def print_grafo(self):
-        pass
+        print("--------------------------------")
+        print("Matriz Adyacencia")
+        print("--------------------------------")
+        for fila in self.matriz_adyacencia:
+            print(fila)

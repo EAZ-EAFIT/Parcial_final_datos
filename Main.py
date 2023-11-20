@@ -16,15 +16,14 @@ def main():
     grafo = Grafo(personas)
     grafo.añadir_mensajes(mensajes)
 
-    # Imprimir mensajes
-    for mensaje in mensajes:
-        print(mensaje)
-        print()
+    # Guardar mensajes en un archivo de texto
+    with open('Registro_Mensajes.txt', 'w', encoding="utf-8") as archivo_registro:
+        for mensaje in mensajes:
+            # Escribir mensaje en archivo de registro
+            archivo_registro.write(str(mensaje) + '\n\n')
 
     grafo.print_datos()
-    print(grafo.matriz_adyacencia)
-    for i in grafo.max_nodos:
-        print(i.objeto.nombre)
+    grafo.print_grafo()
     Salida.mostrarGrafo(grafo.matriz_adyacencia, personas)
 
 main()
