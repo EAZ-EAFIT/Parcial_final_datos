@@ -9,36 +9,38 @@ class Arista:
         self.nodo_destino = nodo_destino
         self.peso = peso
 
+class Nodo:
+    def __init__(self, objeto, grado):
+        self.objeto = objeto
+        self.grado = grado
+
 # Clase grafo
 class Grafo:
 
     def __init__(self, personas):
-
-        # self.nodos = []
+        
+        self.nodos = [Nodo(persona, 0) for persona in personas]
         self.max_aristas = []
         # Contiene todos los nodos y sus grados
 
         self.max_nodo = []
         cantidad_nodos = len(personas)
-
-        self.nodo_fila = {}
-        self.matriz_adyacencia = []
-
-        for i in range(cantidad_nodos):
-            self.matriz_adyacencia.append([])
-            for j in range(cantidad_nodos):
-                self.matriz_adyacencia[i].append(0)
-                self.matriz_adyacencia[i][j] = 0
-            self.nodo_fila[i] = personas[i]
-            self.nodo_fila[personas[i]] = i
+        self.matriz_adyacencia = [[ 0 for j in range(cantidad_nodos)] for range(cantidad_nodos)]
 
     def añadir_mensaje(self, mensaje):
 
-        persona_origen = str(mensaje.id_persona_origen)
-        persona_destino = str(mensaje.id_persona_destino)
+        persona_origen = mensaje.persona_origen
+        persona_destino = mensaje.persona_destino
 
-        nodo_origen = self.nodo_fila[persona_origen]
-        nodo_destino = self.nodo_fila[persona_destino]
+        nodo_origen = None
+        nodo_destino = None
+        indice  = 0
+        while indice < range(len(self.nodos)) and nodo_origen == None and nodo_destino == None:
+            if self.nodos[indice].objeto == persona_origen:
+                nodo_origen = indice
+            elif self.nodos[indice].objeto == persona_destino:
+                nodo_destino = indice
+            indice += 1
 
         self.matriz_adyacencia[nodo_origen][nodo_destino] += 1
         self.matriz_adyacencia[nodo_destino][nodo_origen] += 1
@@ -49,8 +51,6 @@ class Grafo:
             self.max_aristas.append(Arista(nodo_origen, nodo_destino, peso_arista))
         elif self.max_aristas[0].peso < peso_arista:
             self.max_aristas = [Arista(nodo_origen, nodo_destino, peso_arista)]
-        #elif self.max_aristas[0] == peso_arista:
-            #self.max_aristas.append(Arista(nodo_origen, nodo_destino))
 
         # DETERMINAR SI PERSONA_ORIGEN O PERSONA_DESTINO AHORA SON LOS QUE MÁS CONEXIONES TIENEN
 
@@ -58,6 +58,10 @@ class Grafo:
         for mensaje in mensajes:
             self.añadir_mensaje(mensaje)
 
-    # Retorna lo necesario para graficar el grafo graficado
-    def retornar_grafo():
+    # Imprime datos importantes del grado
+    def print_datos(self):
+        pass
+
+    # Imprime el grafo como lista de adyacencia
+    def print_grafo(self):
         pass

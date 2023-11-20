@@ -1,18 +1,26 @@
 import Dummy
 from Grafo import *
 import Salida
+import Persona
 
-cantidad_nodos = 10
-cantidad_mensajes = 100
-mensajes = Dummy.lista_mensajes(cantidad_mensajes, cantidad_nodos)
-grafo = Grafo([str(i+1) for i in range(cantidad_nodos)])
+def main():
+    num_personas = 10
+    num_mensajes = 100
 
-grafo.añadir_mensajes(mensajes)
-print(grafo.matriz_adyacencia)
+    personas = Persona.generar_personas(num_personas)
 
-for mensaje in mensajes:
-    print(mensaje)
-    print()
+    mensajes = Dummy.generar_mensajes(personas, num_mensajes)
 
-print("Max Arista: ", grafo.max_aristas[0].peso)
-Salida.mostrarGrafo(grafo.matriz_adyacencia)
+    grafo = Grafo(personas)
+    grafo.añadir_mensajes(mensajes)
+
+    # Imprimir mensajes
+    for mensaje in mensajes:
+        print(mensaje)
+        print()
+
+    grafo.print_datos()
+
+    Salida.mostrarGrafo(grafo.matriz_adyacencia)
+
+main()
