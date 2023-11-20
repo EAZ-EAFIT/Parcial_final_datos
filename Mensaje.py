@@ -1,10 +1,12 @@
 class Mensaje:
     def __init__(self, persona_origen, persona_destino, fecha, contenido):
+        self.persona_origen = persona_origen
         self.id_origen = persona_origen.id
-        self.nombre_origen = persona_origen.id
+        self.nombre_origen = persona_origen.nombre
 
-        self.id_origen = persona_origen.id
-        self.nombre_destino = persona_destino.id
+        self.persona_destino = persona_destino
+        self.id_destino = persona_destino.id
+        self.nombre_destino = persona_destino.nombre
 
         self.fecha = fecha
         self.contenido = contenido

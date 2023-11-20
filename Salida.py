@@ -1,10 +1,12 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 
-def mostrarGrafo(mAdyacencia):
+def mostrarGrafo(mAdyacencia, personas):
 
     Grafo = nx.Graph()
     numNodos = len(mAdyacencia)
+
+    nombres = {i:personas[i].nombre for i in range(len(personas))}
 
     # Agregamos los nodos al grafo
     Grafo.add_nodes_from(range(numNodos))
@@ -23,7 +25,7 @@ def mostrarGrafo(mAdyacencia):
     pesosAristas = {(i, j): Grafo[i][j]['weight'] for i, j in Grafo.edges()}
 
     # Dibujar el grafo con los nodos y los pesos de las aristas
-    nx.draw(Grafo, pos, with_labels=True, font_weight='bold', node_size=700, node_color='skyblue', font_color='black', font_size=8, arrowsize=10)
+    nx.draw(Grafo, pos, with_labels=True, labels=nombres, font_weight='bold', node_size=700, node_color='skyblue', font_color='black', font_size=8, arrowsize=10)
     nx.draw_networkx_edge_labels(Grafo, pos, edge_labels=pesosAristas)
 
     # Mostrar el grafo

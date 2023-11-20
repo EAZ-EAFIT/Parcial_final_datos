@@ -4,7 +4,9 @@ from Mensaje import Mensaje
 
 def generar_mensaje(personas):
     persona_origen = random.choice(personas)
-    personas_receptoras = personas[:].remove(persona_origen)
+    personas_receptoras = personas[:]
+    personas_receptoras.remove(persona_origen)
+
     persona_destino = random.choice(personas_receptoras)
 
     fecha = Faker().date_time_this_decade().strftime("%Y-%m-%d %H:%M:%S")

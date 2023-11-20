@@ -18,14 +18,14 @@ class Nodo:
 class Grafo:
 
     def __init__(self, personas):
-        
+
         self.nodos = [Nodo(persona, 0) for persona in personas]
         self.max_aristas = []
         # Contiene todos los nodos y sus grados
 
         self.max_nodo = []
         cantidad_nodos = len(personas)
-        self.matriz_adyacencia = [[ 0 for j in range(cantidad_nodos)] for range(cantidad_nodos)]
+        self.matriz_adyacencia = [[ 0 for j in range(cantidad_nodos)] for i in range(cantidad_nodos)]
 
     def añadir_mensaje(self, mensaje):
 
@@ -35,7 +35,7 @@ class Grafo:
         nodo_origen = None
         nodo_destino = None
         indice  = 0
-        while indice < range(len(self.nodos)) and nodo_origen == None and nodo_destino == None:
+        while indice < len(self.nodos) or nodo_origen == None or nodo_destino == None:
             if self.nodos[indice].objeto == persona_origen:
                 nodo_origen = indice
             elif self.nodos[indice].objeto == persona_destino:

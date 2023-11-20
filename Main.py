@@ -21,6 +21,6 @@ def main():
 
     grafo.print_datos()
 
-    Salida.mostrarGrafo(grafo.matriz_adyacencia)
+    Salida.mostrarGrafo(grafo.matriz_adyacencia, personas)
 
 main()
