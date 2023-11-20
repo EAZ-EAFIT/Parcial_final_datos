@@ -5,8 +5,8 @@ import Persona
 
 def main():
     #Definimos el numero de personas y mensajes que vamos a generar
-    num_personas = 10
-    num_mensajes = 100
+    num_personas = 4
+    num_mensajes = 3
 
     #Generamos los arreglo con las personas correspondientes y los mensajes
     personas = Persona.generar_personas(num_personas)
@@ -22,7 +22,9 @@ def main():
         print()
 
     grafo.print_datos()
-
+    print(grafo.matriz_adyacencia)
+    for i in grafo.max_nodos:
+        print(i.objeto.nombre)
     Salida.mostrarGrafo(grafo.matriz_adyacencia, personas)
 
 main()
