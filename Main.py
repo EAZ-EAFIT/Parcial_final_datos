@@ -5,8 +5,8 @@ import Persona
 
 def main():
     #Definimos el numero de personas y mensajes que vamos a generar
-    num_personas = 4
-    num_mensajes = 3
+    num_personas = 10
+    num_mensajes = 7
 
     #Generamos los arreglo con las personas correspondientes y los mensajes
     personas = Persona.generar_personas(num_personas)
